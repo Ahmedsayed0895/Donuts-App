@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.washingtondcsquad.tudee.presentation.utils.modifierExensions.dropShadow
 
 
 @Composable
@@ -39,7 +40,16 @@ fun DonutsSmallCard(
         Box(
             modifier = Modifier
                 .width(140.dp)
-                .shadow(elevation = 20.dp, spotColor = Color(0x80000000))
+                .dropShadow(
+                    color = Color(0xFF000000).copy(0.10f),
+                    blur = 150.dp,
+                    shape = RoundedCornerShape(
+                        topStart = 20.dp,
+                        topEnd = 20.dp,
+                        bottomStart = 10.dp,
+                        bottomEnd = 10.dp
+                    ),
+                )
 
                 .clip(
                     RoundedCornerShape(
@@ -47,7 +57,7 @@ fun DonutsSmallCard(
                         topEnd = 20.dp,
                         bottomStart = 10.dp,
                         bottomEnd = 10.dp
-                    )
+                    ),
                 )
                 .background(Color.White)
                 .clickable {  }
