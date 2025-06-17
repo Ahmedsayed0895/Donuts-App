@@ -7,6 +7,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,18 +25,19 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.donutsapp.R
-
+@Preview(showBackground = true, device = "id:pixel_7_pro")
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun WelcomeScreen(){
     Scaffold (
-        containerColor = Color(0xFFFED8DF)
+        containerColor = Color(0xFFFED8DF),
+        modifier = Modifier.fillMaxHeight()
     ){
         Box(
-            Modifier.verticalScroll(rememberScrollState())
         ){
            Image(
                painter = painterResource(R.drawable.donats),
@@ -42,6 +45,7 @@ fun WelcomeScreen(){
            )
            Column (
                modifier = Modifier
+                   .fillMaxHeight()
                    .padding(horizontal = 40.dp)
 
            ){
@@ -64,7 +68,7 @@ fun WelcomeScreen(){
                    fontWeight = FontWeight.Medium ,
                    lineHeight = 22.sp
                )
-               Spacer(Modifier.height(60.dp))
+               Spacer(Modifier.fillMaxHeight(0.25f))
                Box(
                    modifier = Modifier.fillMaxWidth()
                        .clip(RoundedCornerShape(50.dp))
@@ -82,7 +86,6 @@ fun WelcomeScreen(){
                        lineHeight = 24.sp
                    )
                }
-               Spacer(Modifier.height(60.dp))
 
 
            }
