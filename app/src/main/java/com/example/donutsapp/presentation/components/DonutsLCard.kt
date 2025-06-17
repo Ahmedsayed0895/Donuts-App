@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.donutsapp.R
+import com.washingtondcsquad.tudee.presentation.utils.modifierExensions.dropShadow
 
 
 @Composable
@@ -45,6 +46,11 @@ fun DonutsCard(
         Column(
             modifier = Modifier
                 .width(193.dp)
+                .dropShadow(
+                    color = Color(0xFF000000).copy(0.25f),
+                    blur = 4.dp,
+                    shape = RoundedCornerShape(20.dp),
+                )
                 .clip(RoundedCornerShape(20.dp))
                 .background(backgroundColor)
                 .clickable {  }
@@ -77,7 +83,7 @@ fun DonutsCard(
                 verticalAlignment = Alignment.Bottom
             ) {
                 Text(
-                    text = "$oldPrice",
+                    text = "$$oldPrice",
                     color = Color(0x99000000),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -87,7 +93,7 @@ fun DonutsCard(
                 Spacer(Modifier.width(4.dp))
 
                 Text(
-                    text = "$discountPrice",
+                    text = "$$discountPrice",
                     color = Color(0xFF000000),
                     fontSize = 22.sp,
                     fontWeight = FontWeight.SemiBold,
