@@ -8,6 +8,7 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,10 +16,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -29,13 +33,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.donutsapp.R
 import com.example.tomandjerry.composable.donuts.DonutsCard
 import com.example.tomandjerry.composable.donuts.DonutsSmallCard
 
-
+@Preview(showBackground = true, device = "id:pixel_7_pro")
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun StoreScreen(){
@@ -49,30 +54,47 @@ fun StoreScreen(){
                     .padding(top = 16.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ){
-                Image(
-                    modifier = Modifier.clickable {  },
+                Icon(
+                    modifier = Modifier
+                        .size(30.dp)
+                        .clickable {  },
                     painter = painterResource(R.drawable.home),
-                    contentDescription = "home icon"
+                    contentDescription = "home icon",
+                    tint = Color(0xFFFC6F73),
                 )
-                Image(
-                    modifier = Modifier.clickable {  },
+                Icon(
+                    modifier = Modifier
+                        .size(30.dp)
+                        .clickable{
+
+                        },
                     painter = painterResource(R.drawable.heart),
-                    contentDescription = "home icon"
+                    contentDescription = "home icon",
+                    tint = Color(0xFFFC6F73)
                 )
-                Image(
-                    modifier = Modifier.clickable {  },
+                Icon(
+                    modifier = Modifier
+                        .size(30.dp)
+                        .clickable {  },
                     painter = painterResource(R.drawable.notification_red_icon),
-                    contentDescription = "home icon"
+                    contentDescription = "home icon",
+                    tint = Color(0xFFFC6F73)
                 )
-                Image(
-                    modifier = Modifier.clickable {  },
+                Icon(
+                    modifier = Modifier
+                        .size(30.dp)
+                        .clickable {  },
                     painter = painterResource(R.drawable.buy),
-                    contentDescription = "home icon"
+                    contentDescription = "home icon",
+                    tint = Color(0xFFFC6F73)
                 )
-                Image(
-                    modifier = Modifier.clickable {  },
+                Icon(
+                    modifier = Modifier
+                        .size(30.dp)
+                        .clickable {  },
                     painter = painterResource(R.drawable.person),
-                    contentDescription = "home icon"
+                    contentDescription = "home icon",
+                    tint = Color(0xFFFC6F73)
                 )
             }
         }
@@ -80,14 +102,13 @@ fun StoreScreen(){
         Column (
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
-                .padding(start = 36.dp)
                 .fillMaxSize()
 
         ){
             Row(
                 modifier = Modifier
-                    .width(350.dp)
-                    .padding(top = 81.dp, bottom = 54.dp),
+                    .fillMaxWidth()
+                    .padding(start = 36.dp,top = 81.dp, bottom = 54.dp, end = 36.dp),
                 verticalAlignment = Alignment.CenterVertically
 
             ) {
@@ -112,10 +133,10 @@ fun StoreScreen(){
                 Spacer(Modifier.weight(1f))
                 Box (
                     modifier = Modifier
-                        .clip(RoundedCornerShape(8.dp))
+                        .size(45.dp)
+                        .clip(RoundedCornerShape(16.dp))
                         .background(Color(0xFFFED8DF))
-                        .clickable {  }
-                        .padding(4.dp),
+                        .clickable {  },
                     contentAlignment = Alignment.Center
                 ){
                     Icon(
@@ -132,74 +153,51 @@ fun StoreScreen(){
                 color = Color(0xFF000000),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
-                lineHeight = 24.sp
+                lineHeight = 24.sp,
+                modifier = Modifier.padding(start = 36.dp)
             )
-            Spacer(Modifier.height(24.dp))
 
-            Row (
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
+            LazyRow  (
+                contentPadding = PaddingValues(36.dp),
+                horizontalArrangement = Arrangement.spacedBy(46.dp)
+
             ){
-                DonutsCard(
-                    title = "Strawberry Wheel",
-                    description = "These Baked Strawberry Donuts are filled with fresh strawberries...",
-                    oldPrice = 20,
-                    discountPrice = 16,
-                    donutImage = painterResource(R.drawable.strawberry_donuts),
-                    backgroundColor = Color(0xFFD7E4F6)
-                )
-                Spacer(Modifier.width(46.dp))
-
-
-                DonutsCard(
-                    title = "Chocolate Glaze",
-                    description = "Moist and fluffy baked chocolate donuts full of chocolate flavor.",
-                    oldPrice = 20,
-                    discountPrice = 16,
-                    donutImage = painterResource(R.drawable.chocolate_donut),
-                    backgroundColor = Color(0xFFffc7d0)
-                )
-                Spacer(Modifier.width(46.dp))
+                items (5){
+                    DonutsCard(
+                        title = "Strawberry Wheel",
+                        description = "These Baked Strawberry Donuts are filled with fresh strawberries...",
+                        oldPrice = 20,
+                        discountPrice = 16,
+                        donutImage = painterResource(R.drawable.strawberry_donuts),
+                        backgroundColor = Color(0xFFD7E4F6)
+                    )
+                }
 
             }
 
-            Spacer(Modifier.height(46.dp))
 
             Text(
                 text = "Donuts",
                 color = Color(0xFF000000),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
-                lineHeight = 24.sp
+                lineHeight = 24.sp,
+                modifier = Modifier.padding(start = 36.dp)
             )
-            Spacer(Modifier.height(32.dp))
 
-            Row (
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
+            LazyRow (
+                contentPadding = PaddingValues(36.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ){
-                DonutsSmallCard(
+                items (5){
+                    DonutsSmallCard(
                     title = "Chocolate Cherry",
                     price = 22,
                     image = painterResource(R.drawable.chocolate_cherry),
                 )
-                DonutsSmallCard(
-                    title = "Strawberry Rain",
-                    price = 22,
-                    image = painterResource(R.drawable.strawberry_rain),
-                )
-                DonutsSmallCard(
-                    title = "Strawberry",
-                    price = 22,
-                    image = painterResource(R.drawable.strawberry),
-                )
+                }
 
             }
-            Spacer(Modifier.height(32.dp))
 
 
 
