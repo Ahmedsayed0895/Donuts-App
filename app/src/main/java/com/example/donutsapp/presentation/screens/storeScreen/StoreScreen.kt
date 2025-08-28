@@ -47,7 +47,7 @@ fun StoreScreen(
 
 @Composable
 private fun StoreContent(
-    state: List<StoreScreenState>,
+    state: StoreScreenState,
     onFavoriteClick:(Int)-> Unit
 ) {
     Scaffold(

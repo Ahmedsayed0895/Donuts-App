@@ -12,6 +12,7 @@ data class StoreScreenState (
     val price: Int = 0,
     val salePrice: Int = 0,
     val isFavorite: Boolean  = false,
+    val offerDonuts: List<StoreScreenState> = emptyList<StoreScreenState>(),
     var textFieldValue: String = "",
     val buttonEnabled: Boolean = false
 )

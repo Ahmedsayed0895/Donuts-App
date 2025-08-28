@@ -20,7 +20,7 @@ import kotlin.uuid.ExperimentalUuidApi
 @Composable
 fun CardsHorizontalScroll(
     onFavoriteClick: (Int)-> Unit,
-    state: List<StoreScreenState>,
+    state: StoreScreenState,
 ) {
 
     LazyRow(
@@ -28,7 +28,7 @@ fun CardsHorizontalScroll(
         horizontalArrangement = Arrangement.spacedBy(46.dp),
 
     ) {
-        itemsIndexed(state) { index,currentDonut ->
+        itemsIndexed(state.offerDonuts, key = { _, item -> item.id }) { index,currentDonut ->
 
             val cardBackground =
                 if (index % 2 == 0) Color(0xFFD7E4F6) else Color(0xFFFED8DF)
