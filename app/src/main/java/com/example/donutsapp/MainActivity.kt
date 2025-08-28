@@ -5,17 +5,19 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.donutsapp.ui.theme.DonutsAppTheme
-import com.example.tomandjerry.screens.donuts_screens.WelcomeScreen
+import com.example.tomandjerry.screens.donuts_screens.StoreScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         setContent {
             DonutsAppTheme {
                 //ProductScreen()
-               // StoreScreen()
-                WelcomeScreen()
+                StoreScreen()
+                //WelcomeScreen()
+                //TestScreen()
 
             }
         }

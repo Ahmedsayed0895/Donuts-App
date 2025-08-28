@@ -1,5 +1,6 @@
 package com.washingtondcsquad.tudee.presentation.utils.modifierExensions
 
+import android.graphics.BlurMaskFilter
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Size
@@ -32,9 +33,9 @@ fun Modifier.dropShadow(
         this.color = color
         if (blur.toPx() > 0) {
             asFrameworkPaint().maskFilter =
-                android.graphics.BlurMaskFilter(
+                BlurMaskFilter(
                     blur.toPx(),
-                    android.graphics.BlurMaskFilter.Blur.NORMAL
+                    BlurMaskFilter.Blur.NORMAL
                 )
         }
     }

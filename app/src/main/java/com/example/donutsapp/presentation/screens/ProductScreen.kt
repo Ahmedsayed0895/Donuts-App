@@ -1,4 +1,3 @@
-package com.example.tomandjerry.screens.donuts_screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image

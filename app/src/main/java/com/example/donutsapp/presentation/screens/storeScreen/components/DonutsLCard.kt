@@ -1,4 +1,3 @@
-package com.example.tomandjerry.composable.donuts
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,65 +11,87 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.donutsapp.R
+import com.example.donutsapp.presentation.screens.storeScreen.StoreScreenState
 import com.washingtondcsquad.tudee.presentation.utils.modifierExensions.dropShadow
+import kotlin.uuid.ExperimentalUuidApi
 
 
+@OptIn(ExperimentalUuidApi::class)
 @Composable
 fun DonutsCard(
-    title:String,
-    description:String,
-    oldPrice:Int,
-    discountPrice:Int,
-    donutImage: Painter,
-    backgroundColor: Color
-) {
+    donuts: StoreScreenState,
+    backgroundColor: Color,
+    onFavoriteClick: ()-> Unit,
+    onCardClick: ()-> Unit,
+    isFavorite: Boolean,
+
+    ) {
+
+
     Box(
         modifier = Modifier.width(200.dp)
 
     ) {
         Column(
             modifier = Modifier
-                .width(193.dp)
                 .dropShadow(
                     color = Color(0xFF000000).copy(0.25f),
                     blur = 4.dp,
                     shape = RoundedCornerShape(20.dp),
+                    offsetY = -4.dp,
+                    offsetX = 0.dp,
                 )
                 .clip(RoundedCornerShape(20.dp))
                 .background(backgroundColor)
-                .clickable {  }
+                .clickable { onCardClick() }
                 .padding(15.dp)
 
         ) {
-            Image(
-                painter = painterResource(R.drawable.donut_favorit),
-                contentDescription = "favorite icon",
-            )
+            IconButton(
+                onClick = { onFavoriteClick() },
+                colors = IconButtonDefaults.iconButtonColors(Color.White)
+
+                ) {
+                Icon(
+                    modifier = Modifier.size(30.dp),
+                    imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                    contentDescription = "home icon",
+                    tint = Color(0xFFFC6F73)
+                )
+            }
             Spacer(Modifier.height(118.dp))
             Text(
-                text = title,
+                text = donuts.title,
                 color = Color(0xFF000000),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium,
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = description,
+                text = donuts.description.toString(),
                 color = Color(0x99000000),
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Normal,
@@ -83,7 +104,7 @@ fun DonutsCard(
                 verticalAlignment = Alignment.Bottom
             ) {
                 Text(
-                    text = "$$oldPrice",
+                    text = "$${donuts.price}",
                     color = Color(0x99000000),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -93,7 +114,7 @@ fun DonutsCard(
                 Spacer(Modifier.width(4.dp))
 
                 Text(
-                    text = "$$discountPrice",
+                    text = "$${donuts.salePrice}",
                     color = Color(0xFF000000),
                     fontSize = 22.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -104,7 +125,7 @@ fun DonutsCard(
 
         }
         Image(
-            painter = donutImage,
+            painter = painterResource(donuts.image!!),
             contentDescription = "Strawberry donuts",
             modifier = Modifier.offset(x = 60.dp)
 
